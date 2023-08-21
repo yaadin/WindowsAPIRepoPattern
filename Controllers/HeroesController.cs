@@ -79,5 +79,29 @@ namespace HeroesAPI.Controllers
                 return StatusCode(500, $"an error occured: {ex.Message}");
             }
         }
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                bool delete = await _repository.Delete(id);
+                if (!delete)
+                {
+                    return NotFound();
+                }
+                if (id ==0)
+                {
+                    return BadRequest();
+                }
+                return Ok(delete);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"an error occured: {ex.Message}");
+            }
+        }
     }
 }

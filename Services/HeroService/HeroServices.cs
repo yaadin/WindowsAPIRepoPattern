@@ -37,5 +37,16 @@ namespace HeroesAPI.Services.HeroService
             }
             return hher;
         }
+        public async Task<bool> Delete(int id)
+        {
+            var hher = await _db.heroes.FirstOrDefaultAsync(u => u.id == id);
+            if (hher == null)
+            {
+                return false;
+            }
+            _db.heroes.Remove(hher);
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }

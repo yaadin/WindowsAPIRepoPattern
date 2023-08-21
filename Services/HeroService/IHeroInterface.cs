@@ -9,6 +9,6 @@ namespace HeroesAPI.Services.HeroService
         Task<IEnumerable<HeroModel>> Getall();
         Task<HeroModel> PostHero(HeroModel model);
         Task<HeroModel> GetByiD(int id);
-
+        Task<bool> Delete(int id);
     }
 }
